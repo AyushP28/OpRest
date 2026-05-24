@@ -28,7 +28,7 @@ function OrderPage() {
   useEffect(() => {
     loadMenu()
 
-    socketRef.current = io('http://localhost:8080')
+    socketRef.current = io(import.meta.env.VITE_API_URL || 'http://localhost:8080')
 
     socketRef.current.on('order_updated', ({ orderId, status }) => {
       // update the active tracking view
@@ -55,7 +55,7 @@ function OrderPage() {
 
   async function loadMenu() {
     try {
-      const res = await fetch('/api/menu')
+      const res = await fetch(`${import.meta.env.VITE_API_URL || ''}/api/menu`)
       if (!res.ok) throw new Error()
       setAllMenuItems(await res.json())
     } catch (err) {
@@ -68,7 +68,7 @@ function OrderPage() {
   async function loadOrderHistory() {
     setHistoryLoading(true)
     try {
-      const res = await fetch('/api/orders', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || ''}/api/orders`, {
         headers: { 'Authorization': `Bearer ${getToken()}` }
       })
       if (!res.ok) throw new Error()
@@ -121,7 +121,7 @@ function OrderPage() {
       total: parseFloat(calculateTotal().toFixed(2))
     }
     try {
-      const res = await fetch('/api/orders', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || ''}/api/orders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

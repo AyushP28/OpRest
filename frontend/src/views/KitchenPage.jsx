@@ -22,7 +22,7 @@ function KitchenPage() {
     loadOrders()
 
     // connect to socket and listen for real time order events
-    socketRef.current = io('http://localhost:8080')
+    socketRef.current = io(import.meta.env.VITE_API_URL || 'http://localhost:8080')
 
     socketRef.current.on('new_order', (order) => {
       setOrders(prev => [order, ...prev])
@@ -41,7 +41,7 @@ function KitchenPage() {
 
   async function loadOrders() {
     try {
-      const res = await fetch('/api/orders', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || ''}/api/orders`, {
         headers: { 'Authorization': `Bearer ${getToken()}` }
       })
       if (!res.ok) throw new Error()
@@ -56,7 +56,7 @@ function KitchenPage() {
 
   async function updateStatus(orderId, newStatus) {
     try {
-      const res = await fetch(`/api/orders/${orderId}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || ''}/api/orders/${orderId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

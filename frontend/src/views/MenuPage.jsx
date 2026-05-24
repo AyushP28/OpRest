@@ -47,7 +47,7 @@ function MenuPage() {
     setLoading(true)
     setError('')
     try {
-      const res = await fetch('/api/menu')
+      const res = await fetch(`${import.meta.env.VITE_API_URL || ''}/api/menu`)
       if (!res.ok) throw new Error('Server error')
       const data = await res.json()
       setMenuData(data)
@@ -104,7 +104,7 @@ function MenuPage() {
 
     try {
       if (itemToEdit) {
-        const res = await fetch(`/api/menu/${itemToEdit._id}`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL || ''}/api/menu/${itemToEdit._id}`, {
           method: 'PUT',
           headers: authHeaders(),
           body: JSON.stringify(itemPayload)
@@ -114,7 +114,7 @@ function MenuPage() {
           throw new Error(errData.error || 'Failed to update item')
         }
       } else {
-        const res = await fetch('/api/menu', {
+        const res = await fetch(`${import.meta.env.VITE_API_URL || ''}/api/menu`, {
           method: 'POST',
           headers: authHeaders(),
           body: JSON.stringify(itemPayload)
@@ -134,7 +134,7 @@ function MenuPage() {
   async function handleDelete(id) {
     if (!confirm('Are you sure you want to delete this menu item?')) return
     try {
-      const res = await fetch(`/api/menu/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || ''}/api/menu/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${getToken()}` }
       })
