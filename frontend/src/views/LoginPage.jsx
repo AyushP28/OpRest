@@ -44,6 +44,7 @@ function LoginPage() {
     <main className="page login-page">
       <div className="container">
         <div className="login-card">
+          <span className="login-logo">OpenRest</span>
           <h2>Sign In</h2>
           <p className="login-subtitle">Staff: use your staff credentials. Customers: use the credentials on your table card.</p>
 

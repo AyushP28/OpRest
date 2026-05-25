@@ -3,6 +3,7 @@ function AboutPage() {
     <main className="page about-page">
       <div className="container">
         <h1>About OpenRest</h1>
+        <p className="about-subtitle">A full-stack restaurant ordering system built with the MERN stack.</p>
 
         <section>
           <h2>What We Do</h2>

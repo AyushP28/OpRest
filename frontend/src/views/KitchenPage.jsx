@@ -96,7 +96,10 @@ function KitchenPage() {
           </div>
         </div>
 
-        <p className="kitchen-hint">New orders appear here automatically in real time.</p>
+        <p className="kitchen-hint">
+          <span className="live-dot" />
+          New orders appear here automatically in real time.
+        </p>
 
         {loading && <p className="status-msg">Loading orders...</p>}
 
@@ -107,6 +110,10 @@ function KitchenPage() {
         <div className="kitchen-grid">
           {displayedOrders.map(order => (
             <div key={order._id} className="kitchen-card">
+              <div
+                className="kitchen-card-status-bar"
+                style={{ background: statusColors[order.status] }}
+              />
               <div className="kitchen-card-header">
                 <div>
                   <h4>Table {order.tableNumber}</h4>

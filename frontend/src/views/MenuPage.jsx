@@ -176,6 +176,7 @@ function MenuPage() {
         <div className="menu-grid">
           {displayedItems.map(item => (
             <div key={item._id} className="item-card">
+              <div className="item-card-accent" />
               <div className="item-info">
                 <div className="item-top">
                   <h4>{item.foodname}</h4>
